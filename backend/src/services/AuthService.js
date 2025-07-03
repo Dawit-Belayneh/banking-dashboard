@@ -1,7 +1,7 @@
 const { userModel } = require("../models/User.model")
 const ApiError = require("../utils/apierror")
 const bcryptjs = require("bcryptjs")
-
+const JWTService = require("../utils/JwtService")
 class AuthService{
     static async loginUser(body){
        
@@ -16,9 +16,11 @@ class AuthService{
             throw new ApiError(400,"Invalid Credentials")
         }
 
+        const token = JWTService.generateToken(check_exist._id)
+
         return{
             msg:"Login Success",
-            "token":"123"
+            "token":token
         }
     }
 

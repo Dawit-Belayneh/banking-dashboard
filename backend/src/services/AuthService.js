@@ -41,6 +41,16 @@ class AuthService{
             "token":"123"
         }
     }
+
+    static async profileUser(user){
+        const userd = await userModel.findById(user)
+        .select("name email ac_type createdAt -_id")
+
+        if(!userd){
+            throw new ApiError(401,"Profile Not FOund")
+        }
+        return userd
+    }
 }
 
 module.exports = AuthService

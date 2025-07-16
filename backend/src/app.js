@@ -3,9 +3,11 @@ const NotFoundError = require('./middleware/404Handling')
 const ApiError = require('./utils/apierror');
 const ValidationMiddleware = require('./middleware/ValidationMiddleware');
 const app = express()
+const morgan = require("morgan")
 
 
 app.use(express.json({}));
+app.use(morgan("dev"))
 
 app.use("/api/v1",require("./router"))
 
